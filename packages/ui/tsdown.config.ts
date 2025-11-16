@@ -1,24 +1,21 @@
-import { readFile, writeFile } from "fs/promises";
-import { defineConfig, type Options } from "tsdown";
+import { defineConfig, type UserConfig } from "tsdown";
 
-export default defineConfig(() => {
+export default defineConfig((opts) => {
   const common = {
-    // clean: !opts.watch,
+    clean: !opts.watch,
     dts: true,
     format: ["esm"],
     minify: true,
     outDir: "dist",
-  } satisfies Options;
+  } satisfies UserConfig;
 
   return [
     {
       ...common,
       entry: ["./src/index.ts"],
-      esbuildOptions: (opts) => {
-        opts.banner = {
-          js: '"use client";',
-        };
+      banner: {
+        js: '"use client";',
       },
     },
-  ] satisfies Options[];
+  ] satisfies UserConfig[];
 });

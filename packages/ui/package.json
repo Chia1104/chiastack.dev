@@ -9,15 +9,16 @@
   "types": "./dist/index.d.mts",
   "sideEffects": false,
   "scripts": {
-    "build": "tsup && tailwindcss -i ./src/style/styles.css -o ./dist/styles.css",
-    "dev": "concurrently \"tsup --watch\" \"tailwindcss -i ./src/style/styles.css -o ./dist/styles.css --watch\"",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "clean": "git clean -xdf .turbo node_modules dist",
-    "lint": "eslint \"src/**/*.{ts,js,tsx,jsx}\" --fix",
+    "lint": "eslint",
     "type:check": "tsc --noEmit"
   },
   "devDependencies": {
     "@chiastack/eslint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",
+    "eslint": "catalog:eslint",
     "react": "catalog:react-is",
     "react-dom": "catalog:react-is",
     "tsdown": "catalog:"

@@ -28,6 +28,7 @@
   "devDependencies": {
     "@chiastack/eslint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",
+    "eslint": "catalog:eslint",
     "tsdown": "catalog:"
   }
 }

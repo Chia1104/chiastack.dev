@@ -1,4 +1,4 @@
-import { defineConfig, type Options } from "tsup";
+import { defineConfig, type UserConfig } from "tsdown";
 
 export default defineConfig((opts) => {
   return {
@@ -9,5 +9,5 @@ export default defineConfig((opts) => {
     format: ["cjs", "esm"],
     target: "es2020",
     tsconfig: "tsconfig.build.json",
-  } satisfies Options;
+  } satisfies UserConfig;
 });
