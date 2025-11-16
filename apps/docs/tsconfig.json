@@ -1,0 +1,17 @@
+{
+  "extends": "@chiastack/tsconfig/base.json",
+  "compilerOptions": {
+    "types": ["vitest/globals"],
+    "lib": ["ES2022", "dom", "dom.iterable"],
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "fumadocs-mdx:collections/*": [".source/*"]
+    },
+    "plugins": [{ "name": "next" }],
+    "module": "esnext"
+  },
+  "include": [".", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", ".next", "vitest.config.mts.timestamp-*.mjs"]
+}

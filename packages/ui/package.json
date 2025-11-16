@@ -16,6 +16,7 @@
     "type:check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@chiastack/eslint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",
     "react": "catalog:react-is",
     "react-dom": "catalog:react-is",
