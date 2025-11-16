@@ -6,7 +6,7 @@ import reactConfig from "@chiastack/eslint/react";
 
 export default defineConfig(
   {
-    ignores: [".next/**", "**/.map.ts", "next-env.d.ts"],
+    ignores: [".next/**", "**/.map.ts", "next-env.d.ts", ".source/**"],
   },
   baseConfig,
   reactConfig,

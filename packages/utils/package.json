@@ -10,7 +10,7 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "clean": "git clean -xdf .turbo node_modules dist",
-    "lint": "eslint \"src/**/*.{ts,js,tsx,jsx}\" --fix",
+    "lint": "eslint",
     "type:check": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
