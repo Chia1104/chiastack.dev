@@ -49,9 +49,9 @@ export default defineConfig((opts) => {
         pkgJson.exports = {
           "./package.json": "./package.json",
           ".": {
+            require: "./dist/index.cjs",
             import: "./dist/index.mjs",
             types: "./dist/index.d.mts",
-            require: "./dist/index.cjs",
           },
         };
         [...ESEntries]

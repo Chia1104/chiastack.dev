@@ -36,8 +36,15 @@ catalogs:
     babel-plugin-react-compiler: 19.1.0-rc.3
     react: ^19.2.0
     react-dom: ^19.2.0
+  react-canary:
+    react: 19.3.0-canary-fb2177c1-20251114
+    react-dom: 19.3.0-canary-fb2177c1-20251114
   tailwindcss:
     '@tailwindcss/postcss': 4.1.17
+    '@tailwindcss/vite': 4.1.17
     tailwindcss: 4.1.17
+  vite:
+    vite: 7.2.2
+    '@vitejs/plugin-react': 5.1.1
 
 linkWorkspacePackages: true
