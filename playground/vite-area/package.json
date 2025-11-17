@@ -11,8 +11,8 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@tanstack/react-router": "^1.136.8",
-    "@tanstack/router-plugin": "^1.136.8",
+    "@tanstack/react-router": "catalog:tanstack",
+    "@tanstack/router-plugin": "catalog:tanstack",
     "dayjs": "catalog:",
     "react": "catalog:react-canary",
     "react-dom": "catalog:react-canary",
@@ -24,7 +24,7 @@
     "@chiastack/utils": "workspace:*",
     "@tailwindcss/postcss": "catalog:tailwindcss",
     "@tailwindcss/vite": "catalog:tailwindcss",
-    "@types/node": "^24.10.0",
+    "@types/node": "catalog:",
     "@types/react": "catalog:react-is",
     "@types/react-dom": "catalog:react-is",
     "@vitejs/plugin-react": "catalog:vite",

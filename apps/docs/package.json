@@ -25,7 +25,7 @@
     "@chiastack/tsconfig": "workspace:*",
     "@tailwindcss/postcss": "catalog:tailwindcss",
     "@types/mdx": "^2.0.13",
-    "@types/node": "^24.10.0",
+    "@types/node": "catalog:",
     "@types/react": "catalog:react-is",
     "@types/react-dom": "catalog:react-is",
     "babel-plugin-react-compiler": "catalog:react-is",
