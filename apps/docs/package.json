@@ -11,6 +11,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@chiastack/utils": "workspace:*",
     "fumadocs-core": "16.0.12",
     "fumadocs-mdx": "14.0.0",
     "fumadocs-ui": "16.0.12",

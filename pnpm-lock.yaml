@@ -131,6 +131,9 @@ importers:
 
   apps/docs:
     dependencies:
+      '@chiastack/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       fumadocs-core:
         specifier: 16.0.12
         version: 16.0.12(@tanstack/react-router@1.136.8(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@types/react@19.2.5)(lucide-react@0.552.0(react@19.2.0))(next@16.0.3(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
