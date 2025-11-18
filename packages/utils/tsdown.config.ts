@@ -3,10 +3,7 @@ import { defineConfig, type UserConfig } from "tsdown";
 
 type PackageJson = {
   name: string;
-  exports: Record<
-    string,
-    { import: string; types: string; require: string } | string
-  >;
+  exports: Record<string, { import: string; types: string } | string>;
   typesVersions: Record<"*", Record<string, string[]>>;
   files: string[];
   dependencies: Record<string, string>;
@@ -28,7 +25,7 @@ export default defineConfig((opts) => {
   const common = {
     clean: !opts.watch,
     dts: true,
-    format: ["esm", "cjs"],
+    format: ["esm"],
     minify: true,
     outDir: "dist",
   } satisfies UserConfig;
@@ -49,7 +46,6 @@ export default defineConfig((opts) => {
         pkgJson.exports = {
           "./package.json": "./package.json",
           ".": {
-            require: "./dist/index.cjs",
             import: "./dist/index.mjs",
             types: "./dist/index.d.mts",
           },
@@ -63,7 +59,6 @@ export default defineConfig((opts) => {
             // ./src/foo/foo.ts -> foo
             const file = entry.split("/").pop()?.split(".")[0] ?? "";
             pkgJson.exports["./" + file] = {
-              require: "./dist/" + file + "/" + file + ".cjs",
               import: "./dist/" + file + "/" + file + ".mjs",
               types: "./dist/" + file + "/" + file + ".d.mts",
             };
