@@ -1,5 +1,11 @@
 # @chiastack/eslint
 
+## 2.0.2
+
+### Patch Changes
+
+- caed695: Set eslint to public
+
 ## 2.0.1
 
 ### Patch Changes
