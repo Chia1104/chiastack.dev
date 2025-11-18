@@ -12,16 +12,16 @@
       ]
     },
     "lint": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["build"],
       "cache": true,
       "outputs": [".cache/.eslintcache"]
     },
     "type:check": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["build"],
       "cache": true
     },
     "test": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["build"],
       "outputs": ["coverage/**"],
       "cache": true
     },
