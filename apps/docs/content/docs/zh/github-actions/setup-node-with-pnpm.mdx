@@ -3,7 +3,7 @@ title: Setup Node with pnpm
 description: 設置 Node.js 和 pnpm 並啟用自動快取
 ---
 
-`setup-node-witg-pnpm` action 提供了一種便捷的方式，可在您的 GitHub Actions 工作流程中設置 Node.js 和 pnpm，並啟用自動依賴項快取。
+`setup-node-with-pnpm` action 提供了一種便捷的方式，可在您的 GitHub Actions 工作流程中設置 Node.js 和 pnpm，並啟用自動依賴項快取。
 
 ## 概述
 
@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Setup Node.js and pnpm
-        uses: ./.github/actions/setup-node-witg-pnpm
+        uses: ./.github/actions/setup-node-with-pnpm
 
       - name: Build
         run: pnpm build
@@ -65,7 +65,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Setup Node.js and pnpm
-        uses: chia1104/chiastack.dev/.github/actions/setup-node-witg-pnpm@main
+        uses: chia1104/chiastack.dev/.github/actions/setup-node-with-pnpm@main
 
       - name: Build
         run: pnpm build
@@ -79,7 +79,7 @@ jobs:
 
 ```yaml
 - name: Setup Node.js and pnpm
-  uses: chia1104/chiastack.dev/.github/actions/setup-node-witg-pnpm@main
+  uses: chia1104/chiastack.dev/.github/actions/setup-node-with-pnpm@main
   with:
     OPTIONAL_INSTALL_COMMAND: --frozen-lockfile
 ```
@@ -95,7 +95,7 @@ jobs:
 
 ```yaml
 - name: Setup Node.js and pnpm
-  uses: chia1104/chiastack.dev/.github/actions/setup-node-witg-pnpm@v1.0.0
+  uses: chia1104/chiastack.dev/.github/actions/setup-node-with-pnpm@v1.0.0
 ```
 
 ## 完整範例工作流程
@@ -119,7 +119,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Setup Node.js and pnpm
-        uses: chia1104/chiastack.dev/.github/actions/setup-node-witg-pnpm@main
+        uses: chia1104/chiastack.dev/.github/actions/setup-node-with-pnpm@main
         with:
           OPTIONAL_INSTALL_COMMAND: --frozen-lockfile
 
