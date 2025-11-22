@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { createContext, use, useRef } from "react";
+import { createContext, useContext, useRef } from "react";
 
 import { useStore } from "zustand";
 import type { StateCreator, StoreApi } from "zustand/vanilla";
@@ -130,7 +130,9 @@ export const defineChatStore = <
     }
 
     return (
-      <ChatStoreContext value={storeRef.current}>{children}</ChatStoreContext>
+      <ChatStoreContext.Provider value={storeRef.current}>
+        {children}
+      </ChatStoreContext.Provider>
     );
   };
 
@@ -140,7 +142,7 @@ export const defineChatStore = <
     ) => T,
     name = "useChatStore"
   ): T => {
-    const chatStoreContext = use(ChatStoreContext);
+    const chatStoreContext = useContext(ChatStoreContext);
     if (!chatStoreContext) {
       throw new Error(`${name} must be used within ChatStoreProvider`);
     }

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, use, useRef } from "react";
+import { createContext, useContext, useRef } from "react";
 
 import { useStore } from "zustand";
 import type { StateCreator, StoreApi } from "zustand/vanilla";
@@ -57,7 +57,7 @@ export const useTicTacToeStore = <T,>(
   selector: (store: TicTacToeStore) => T,
   name = "useTicTacToeStore"
 ): T => {
-  const store = use(TicTacToeStoreContext);
+  const store = useContext(TicTacToeStoreContext);
   if (!store) {
     throw new Error(`${name} must be used within a TicTacToeStoreProvider.`);
   }
@@ -75,8 +75,8 @@ export const TicTacToeStoreProvider = ({
   }
 
   return (
-    <TicTacToeStoreContext value={store.current}>
+    <TicTacToeStoreContext.Provider value={store.current}>
       {children}
-    </TicTacToeStoreContext>
+    </TicTacToeStoreContext.Provider>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, use, useRef } from "react";
+import { createContext, useContext, useRef } from "react";
 
 import { useStore } from "zustand";
 import type { StateCreator, StoreApi } from "zustand/vanilla";
@@ -61,14 +61,18 @@ export const TodoStoreProvider = ({
     store.current = creator(initialState);
   }
 
-  return <TodoStoreContext value={store.current}>{children}</TodoStoreContext>;
+  return (
+    <TodoStoreContext.Provider value={store.current}>
+      {children}
+    </TodoStoreContext.Provider>
+  );
 };
 
 export const useTodoStore = <T,>(
   selector: (store: TodoStore) => T,
   name = "useTodoStore"
 ): T => {
-  const store = use(TodoStoreContext);
+  const store = useContext(TodoStoreContext);
   if (!store) {
     throw new Error(`${name} must be used within a TodoStoreProvider.`);
   }
