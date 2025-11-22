@@ -18,7 +18,7 @@ catalog:
   superjson: 2.2.5
   tsdown: ^0.16.5
   typescript: ^5.9.3
-  zod: ^4.1.12
+  zod: 4.1.12
 
 catalogs:
   eslint:
@@ -46,6 +46,7 @@ catalogs:
     '@tanstack/react-query': ^5.90.7
     '@tanstack/react-router': ^1.136.8
     '@tanstack/router-plugin': ^1.136.8
+    '@tanstack/pacer': '0.16.3'
   vite:
     '@vitejs/plugin-react': 5.1.1
     vite: 7.2.2
