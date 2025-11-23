@@ -41,17 +41,25 @@ fn group_by_type<'a>(
 ) -> Vec<(String, Vec<&'a ParsedCommit>)> {
     let mut groups: HashMap<String, Vec<&ParsedCommit>> = HashMap::new();
 
+    // Group by type_key (e.g., "feat", "fix") instead of display_name
     for commit in commits {
-        let type_name = config.get_type_display_name(&commit.commit_type);
-        groups.entry(type_name.to_string())
+        groups.entry(commit.commit_type.clone())
             .or_insert_with(Vec::new)
             .push(commit);
     }
 
-    let mut result: Vec<_> = groups.into_iter().collect();
-    result.sort_by_key(|(type_name, _)| {
-        config.get_type_priority(type_name)
-    });
-
-    result
+    // Sort by priority using type_key, then convert to display_name
+    let mut result: Vec<_> = groups.into_iter()
+        .map(|(type_key, commits)| {
+            let display_name = config.get_type_display_name(&type_key).to_string();
+            (display_name, commits, config.get_type_priority(&type_key))
+        })
+        .collect();
+    
+    result.sort_by_key(|(_, _, priority)| *priority);
+    
+    // Return only (display_name, commits) tuples
+    result.into_iter()
+        .map(|(display_name, commits, _)| (display_name, commits))
+        .collect()
 }
