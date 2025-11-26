@@ -7,11 +7,17 @@
 import { Route as rootRouteImport } from "./routes/__root";
 import { Route as IndexRouteImport } from "./routes/index";
 import { Route as TicTacToeRouteImport } from "./routes/tic-tac-toe";
+import { Route as TodoRouteImport } from "./routes/todo";
 import { Route as TradingviewRouteImport } from "./routes/tradingview";
 
 const TradingviewRoute = TradingviewRouteImport.update({
   id: "/tradingview",
   path: "/tradingview",
+  getParentRoute: () => rootRouteImport,
+} as any);
+const TodoRoute = TodoRouteImport.update({
+  id: "/todo",
+  path: "/todo",
   getParentRoute: () => rootRouteImport,
 } as any);
 const TicTacToeRoute = TicTacToeRouteImport.update({
@@ -28,30 +34,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
   "/tic-tac-toe": typeof TicTacToeRoute;
+  "/todo": typeof TodoRoute;
   "/tradingview": typeof TradingviewRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/tic-tac-toe": typeof TicTacToeRoute;
+  "/todo": typeof TodoRoute;
   "/tradingview": typeof TradingviewRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   "/": typeof IndexRoute;
   "/tic-tac-toe": typeof TicTacToeRoute;
+  "/todo": typeof TodoRoute;
   "/tradingview": typeof TradingviewRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/tic-tac-toe" | "/tradingview";
+  fullPaths: "/" | "/tic-tac-toe" | "/todo" | "/tradingview";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/tic-tac-toe" | "/tradingview";
-  id: "__root__" | "/" | "/tic-tac-toe" | "/tradingview";
+  to: "/" | "/tic-tac-toe" | "/todo" | "/tradingview";
+  id: "__root__" | "/" | "/tic-tac-toe" | "/todo" | "/tradingview";
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
   TicTacToeRoute: typeof TicTacToeRoute;
+  TodoRoute: typeof TodoRoute;
   TradingviewRoute: typeof TradingviewRoute;
 }
 
@@ -62,6 +72,13 @@ declare module "@tanstack/react-router" {
       path: "/tradingview";
       fullPath: "/tradingview";
       preLoaderRoute: typeof TradingviewRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/todo": {
+      id: "/todo";
+      path: "/todo";
+      fullPath: "/todo";
+      preLoaderRoute: typeof TodoRouteImport;
       parentRoute: typeof rootRouteImport;
     };
     "/tic-tac-toe": {
@@ -84,6 +101,7 @@ declare module "@tanstack/react-router" {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TicTacToeRoute: TicTacToeRoute,
+  TodoRoute: TodoRoute,
   TradingviewRoute: TradingviewRoute,
 };
 export const routeTree = rootRouteImport
