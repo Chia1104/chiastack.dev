@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  createContext,
   forwardRef,
   useCallback,
   useEffect,
@@ -9,25 +8,15 @@ import {
   useLayoutEffect,
   useRef,
   useState,
-  useContext,
 } from "react";
 
-import type {
-  IChartApi,
-  ISeriesApi,
-  SeriesType,
-  ChartOptions,
-  DeepPartial,
-} from "lightweight-charts";
+import type { IChartApi, ChartOptions, DeepPartial } from "lightweight-charts";
 import { createChart } from "lightweight-charts";
 
-export interface ChartContext {
-  _api: IChartApi | null;
-  api: () => IChartApi;
-  free: (series: ISeriesApi<SeriesType>) => void;
-}
+import { ChartContextProvider } from "./chart.context";
+import type { ChartContext } from "./chart.context";
 
-interface ChartContainerProps {
+export interface ChartContainerProps {
   children: React.ReactNode;
   container: HTMLDivElement;
   layout?: DeepPartial<ChartOptions["layout"]>;
@@ -38,16 +27,6 @@ interface ChartContainerProps {
 interface ChartProps
   extends Omit<ChartContainerProps, "container">,
     Omit<React.ComponentPropsWithoutRef<"div">, "children"> {}
-
-export const ChartContext = createContext<ChartContext | null>(null);
-
-export const useChart = (name = "useChart") => {
-  const context = useContext(ChartContext);
-  if (!context) {
-    throw new Error(`${name} must be used within a Chart`);
-  }
-  return context;
-};
 
 export const Chart = forwardRef<IChartApi, ChartProps>(
   ({ children, layout, initOptions, onInit, ...props }, ref) => {
@@ -135,9 +114,9 @@ export const ChartContainer = forwardRef<IChartApi, ChartContainerProps>(
     }, [layout]);
 
     return (
-      <ChartContext.Provider value={chartApiRef.current}>
+      <ChartContextProvider value={chartApiRef.current}>
         {children}
-      </ChartContext.Provider>
+      </ChartContextProvider>
     );
   }
 );

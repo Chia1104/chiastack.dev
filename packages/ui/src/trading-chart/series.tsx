@@ -6,8 +6,6 @@ import {
   useRef,
   forwardRef,
   useImperativeHandle,
-  createContext,
-  useContext,
 } from "react";
 
 import type {
@@ -20,31 +18,23 @@ import type {
   SeriesDataItemTypeMap,
 } from "lightweight-charts";
 
-import { useChart } from "./chart";
+import { useChartContext } from "./chart.context";
+import type { SeriesContext } from "./series.context";
+import { SeriesContextProvider } from "./series.context";
 
-export interface SeriesContext<T extends SeriesType> {
-  _api: ISeriesApi<T> | null;
-  api: () => ISeriesApi<T>;
-  free: (chart?: IChartApi) => void;
-  isDisposed: () => boolean;
-}
-
-interface Props<T extends SeriesType> {
-  data: SeriesDataItemTypeMap<Time>[T][];
+interface Props<T extends SeriesType, TTime extends Time> {
+  data: SeriesDataItemTypeMap<TTime>[T][];
   series: SeriesDefinition<T>;
   options?: SeriesPartialOptionsMap[T];
   onInit?: (series: ISeriesApi<T>, chart: IChartApi | null) => void;
   children?: React.ReactNode;
 }
 
-const SeriesContext = createContext<SeriesContext<SeriesType> | null>(null);
-
-const SeriesWithGeneric = <T extends SeriesType>(
-  { data, series: _series, options, onInit, children }: Props<T>,
+const SeriesWithGeneric = <T extends SeriesType, TTime extends Time>(
+  { data, series: _series, options, onInit, children }: Props<T, TTime>,
   ref: ForwardedRef<ISeriesApi<T>>
 ) => {
-  useImperativeHandle(ref, () => series.current.api(), []);
-  const chart = useChart("Series");
+  const chart = useChartContext("Series");
   const series = useRef<SeriesContext<T>>({
     _api: null,
     api() {
@@ -82,21 +72,18 @@ const SeriesWithGeneric = <T extends SeriesType>(
     }
   }, [options]);
 
+  useImperativeHandle(ref, () => series.current.api(), []);
+
   return (
-    <SeriesContext.Provider value={series.current}>
+    <SeriesContextProvider value={series.current}>
       {children}
-    </SeriesContext.Provider>
+    </SeriesContextProvider>
   );
 };
 
-export const useSeries = (name = "useSeries") => {
-  const context = useContext(SeriesContext);
-  if (!context) {
-    throw new Error(`${name} must be used within a Series`);
-  }
-  return context;
-};
-
-export const Series = forwardRef(SeriesWithGeneric) as <T extends SeriesType>(
-  props: Props<T> & { ref?: ForwardedRef<ISeriesApi<T>> }
+export const Series = forwardRef(SeriesWithGeneric) as <
+  T extends SeriesType,
+  TTime extends Time,
+>(
+  props: Props<T, TTime> & { ref?: ForwardedRef<ISeriesApi<T>> }
 ) => ReturnType<typeof SeriesWithGeneric>;

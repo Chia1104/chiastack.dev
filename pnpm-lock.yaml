@@ -439,6 +439,9 @@ importers:
       '@chiastack/services':
         specifier: workspace:*
         version: link:../../packages/services
+      '@chiastack/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@chiastack/utils':
         specifier: workspace:*
         version: link:../../packages/utils
@@ -475,6 +478,9 @@ importers:
       ky:
         specifier: 'catalog:'
         version: 1.14.0
+      lightweight-charts:
+        specifier: ^5.0.9
+        version: 5.0.9
       lucide-react:
         specifier: ^0.554.0
         version: 0.554.0(react@19.2.0)
@@ -499,6 +505,9 @@ importers:
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.4.0
+      technicalindicators:
+        specifier: ^3.1.0
+        version: 3.1.0
       usehooks-ts:
         specifier: ^3.1.1
         version: 3.1.1(react@19.2.0)
@@ -548,21 +557,45 @@ importers:
 
   playground/vite-area:
     dependencies:
+      '@radix-ui/react-label':
+        specifier: ^2.1.8
+        version: 2.1.8(@types/react-dom@19.2.3(@types/react@19.2.5))(@types/react@19.2.5)(react-dom@19.3.0-canary-fb2177c1-20251114(react@19.3.0-canary-fb2177c1-20251114))(react@19.3.0-canary-fb2177c1-20251114)
+      '@radix-ui/react-slot':
+        specifier: ^1.2.4
+        version: 1.2.4(@types/react@19.2.5)(react@19.3.0-canary-fb2177c1-20251114)
       '@tanstack/react-router':
         specifier: catalog:tanstack
         version: 1.136.8(react-dom@19.3.0-canary-fb2177c1-20251114(react@19.3.0-canary-fb2177c1-20251114))(react@19.3.0-canary-fb2177c1-20251114)
       '@tanstack/router-plugin':
         specifier: catalog:tanstack
         version: 1.136.8(@tanstack/react-router@1.136.8(react-dom@19.3.0-canary-fb2177c1-20251114(react@19.3.0-canary-fb2177c1-20251114))(react@19.3.0-canary-fb2177c1-20251114))(vite@7.2.2(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)(yaml@2.8.1))
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       dayjs:
         specifier: 'catalog:'
         version: 1.11.19
+      lightweight-charts:
+        specifier: ^5.0.9
+        version: 5.0.9
+      lucide-react:
+        specifier: ^0.554.0
+        version: 0.554.0(react@19.3.0-canary-fb2177c1-20251114)
       react:
         specifier: catalog:react-canary
         version: 19.3.0-canary-fb2177c1-20251114
       react-dom:
         specifier: catalog:react-canary
         version: 19.3.0-canary-fb2177c1-20251114(react@19.3.0-canary-fb2177c1-20251114)
+      tailwind-merge:
+        specifier: ^3.4.0
+        version: 3.4.0
+      technicalindicators:
+        specifier: ^3.1.0
+        version: 3.1.0
       zod:
         specifier: 'catalog:'
         version: 4.1.12
@@ -570,9 +603,15 @@ importers:
       '@chiastack/eslint':
         specifier: workspace:*
         version: link:../../packages/eslint
+      '@chiastack/features':
+        specifier: workspace:*
+        version: link:../../packages/features
       '@chiastack/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
+      '@chiastack/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@chiastack/utils':
         specifier: workspace:*
         version: link:../../packages/utils
@@ -606,6 +645,9 @@ importers:
       tailwindcss:
         specifier: catalog:tailwindcss
         version: 4.1.17
+      tw-animate-css:
+        specifier: ^1.4.0
+        version: 1.4.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -7513,6 +7555,12 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.5
 
+  '@radix-ui/react-compose-refs@1.1.2(@types/react@19.2.5)(react@19.3.0-canary-fb2177c1-20251114)':
+    dependencies:
+      react: 19.3.0-canary-fb2177c1-20251114
+    optionalDependencies:
+      '@types/react': 19.2.5
+
   '@radix-ui/react-context@1.1.2(@types/react@19.2.5)(react@19.2.0)':
     dependencies:
       react: 19.2.0
@@ -7593,6 +7641,15 @@ snapshots:
       '@radix-ui/react-primitive': 2.1.4(@types/react-dom@19.2.3(@types/react@19.2.5))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
+    optionalDependencies:
+      '@types/react': 19.2.5
+      '@types/react-dom': 19.2.3(@types/react@19.2.5)
+
+  '@radix-ui/react-label@2.1.8(@types/react-dom@19.2.3(@types/react@19.2.5))(@types/react@19.2.5)(react-dom@19.3.0-canary-fb2177c1-20251114(react@19.3.0-canary-fb2177c1-20251114))(react@19.3.0-canary-fb2177c1-20251114)':
+    dependencies:
+      '@radix-ui/react-primitive': 2.1.4(@types/react-dom@19.2.3(@types/react@19.2.5))(@types/react@19.2.5)(react-dom@19.3.0-canary-fb2177c1-20251114(react@19.3.0-canary-fb2177c1-20251114))(react@19.3.0-canary-fb2177c1-20251114)
+      react: 19.3.0-canary-fb2177c1-20251114
+      react-dom: 19.3.0-canary-fb2177c1-20251114(react@19.3.0-canary-fb2177c1-20251114)
     optionalDependencies:
       '@types/react': 19.2.5
       '@types/react-dom': 19.2.3(@types/react@19.2.5)
@@ -7708,6 +7765,15 @@ snapshots:
       '@types/react': 19.2.5
       '@types/react-dom': 19.2.3(@types/react@19.2.5)
 
+  '@radix-ui/react-primitive@2.1.4(@types/react-dom@19.2.3(@types/react@19.2.5))(@types/react@19.2.5)(react-dom@19.3.0-canary-fb2177c1-20251114(react@19.3.0-canary-fb2177c1-20251114))(react@19.3.0-canary-fb2177c1-20251114)':
+    dependencies:
+      '@radix-ui/react-slot': 1.2.4(@types/react@19.2.5)(react@19.3.0-canary-fb2177c1-20251114)
+      react: 19.3.0-canary-fb2177c1-20251114
+      react-dom: 19.3.0-canary-fb2177c1-20251114(react@19.3.0-canary-fb2177c1-20251114)
+    optionalDependencies:
+      '@types/react': 19.2.5
+      '@types/react-dom': 19.2.3(@types/react@19.2.5)
+
   '@radix-ui/react-roving-focus@1.1.11(@types/react-dom@19.2.3(@types/react@19.2.5))(@types/react@19.2.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@radix-ui/primitive': 1.1.3
@@ -7762,6 +7828,13 @@ snapshots:
     dependencies:
       '@radix-ui/react-compose-refs': 1.1.2(@types/react@19.2.5)(react@19.2.0)
       react: 19.2.0
+    optionalDependencies:
+      '@types/react': 19.2.5
+
+  '@radix-ui/react-slot@1.2.4(@types/react@19.2.5)(react@19.3.0-canary-fb2177c1-20251114)':
+    dependencies:
+      '@radix-ui/react-compose-refs': 1.1.2(@types/react@19.2.5)(react@19.3.0-canary-fb2177c1-20251114)
+      react: 19.3.0-canary-fb2177c1-20251114
     optionalDependencies:
       '@types/react': 19.2.5
 
@@ -10764,6 +10837,10 @@ snapshots:
   lucide-react@0.554.0(react@19.2.0):
     dependencies:
       react: 19.2.0
+
+  lucide-react@0.554.0(react@19.3.0-canary-fb2177c1-20251114):
+    dependencies:
+      react: 19.3.0-canary-fb2177c1-20251114
 
   maath@0.10.8(@types/three@0.181.0)(three@0.181.1):
     dependencies:
