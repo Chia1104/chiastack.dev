@@ -356,6 +356,9 @@ importers:
       '@chiastack/utils':
         specifier: workspace:*
         version: link:../utils
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.10.1
       eslint:
         specifier: catalog:eslint
         version: 9.39.1(jiti@2.6.1)
@@ -418,6 +421,9 @@ importers:
       '@chiastack/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.10.1
       dayjs:
         specifier: 'catalog:'
         version: 1.11.19
