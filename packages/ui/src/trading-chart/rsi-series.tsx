@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import * as React from "react";
 
 import type { Time } from "lightweight-charts";
 import { LineSeries } from "lightweight-charts";
@@ -54,7 +54,7 @@ export const RsiSeries = <TTime extends Time>({
   },
   showLevels = true,
 }: RsiSeriesProps<TTime>) => {
-  const { rsiData, overboughtData, oversoldData } = useMemo(() => {
+  const { rsiData, overboughtData, oversoldData } = React.useMemo(() => {
     if (data.length === 0) {
       return {
         rsiData: [],

@@ -25,17 +25,19 @@ const ESEntries = [
 
 export default defineConfig((opts) => {
   const common = {
-    clean: !opts.watch,
+    clean: true,
     dts: true,
     format: ["esm"],
     minify: true,
     outDir: "dist",
-    external: [
-      "react",
-      "react-dom",
-      "lightweight-charts",
-      "technicalindicators",
-    ],
+    platform: "neutral",
+    sourcemap: false,
+    exports: true,
+    inputOptions: {
+      transform: {
+        jsx: "react",
+      },
+    },
   } satisfies UserConfig;
 
   return [
@@ -72,11 +74,11 @@ export default defineConfig((opts) => {
               folderName === fileName ? `./${fileName}` : `./${relativePath}`;
 
             pkgJson.exports[exportPath] = {
-              import: "./dist/" + relativePath + ".mjs",
-              types: "./dist/" + relativePath + ".d.mts",
+              import: "./dist/" + relativePath + ".js",
+              types: "./dist/" + relativePath + ".d.ts",
             };
             pkgJson.typesVersions["*"][exportPath.replace(/^\.\//, "")] = [
-              "./dist/" + relativePath + ".d.mts",
+              "./dist/" + relativePath + ".d.ts",
             ];
           });
 

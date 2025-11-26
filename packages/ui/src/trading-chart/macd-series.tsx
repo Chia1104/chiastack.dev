@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import * as React from "react";
 
 import type { Time } from "lightweight-charts";
 import { LineSeries, HistogramSeries } from "lightweight-charts";
@@ -52,7 +52,7 @@ export const MacdSeries = <TTime extends Time>({
     downColor: "#ef5350",
   },
 }: MacdSeriesProps<TTime>) => {
-  const { macdData, signalData, histogramData } = useMemo(() => {
+  const { macdData, signalData, histogramData } = React.useMemo(() => {
     if (data.length === 0) {
       return {
         macdData: [],

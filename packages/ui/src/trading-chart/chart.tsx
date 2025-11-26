@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import * as React from "react";
 
 import type { IChartApi, ChartOptions, DeepPartial } from "lightweight-charts";
 import { createChart } from "lightweight-charts";
@@ -28,10 +20,12 @@ interface ChartProps
   extends Omit<ChartContainerProps, "container">,
     Omit<React.ComponentPropsWithoutRef<"div">, "children"> {}
 
-export const Chart = forwardRef<IChartApi, ChartProps>(
+export const Chart = React.forwardRef<IChartApi, ChartProps>(
   ({ children, layout, initOptions, onInit, ...props }, ref) => {
-    const [container, setContainer] = useState<HTMLDivElement | null>(null);
-    const handleRef = useCallback(
+    const [container, setContainer] = React.useState<HTMLDivElement | null>(
+      null
+    );
+    const handleRef = React.useCallback(
       (ref: HTMLDivElement) => setContainer(ref),
       []
     );
@@ -52,9 +46,9 @@ export const Chart = forwardRef<IChartApi, ChartProps>(
   }
 );
 
-export const ChartContainer = forwardRef<IChartApi, ChartContainerProps>(
+export const ChartContainer = React.forwardRef<IChartApi, ChartContainerProps>(
   ({ children, container, layout, initOptions, onInit }, ref) => {
-    const chartApiRef = useRef<ChartContext>({
+    const chartApiRef = React.useRef<ChartContext>({
       _api: null,
       api() {
         if (!this._api) {
@@ -74,7 +68,7 @@ export const ChartContainer = forwardRef<IChartApi, ChartContainerProps>(
       },
     });
 
-    useLayoutEffect(() => {
+    React.useLayoutEffect(() => {
       const currentRef = chartApiRef.current;
       const chart = currentRef.api();
 
@@ -92,21 +86,21 @@ export const ChartContainer = forwardRef<IChartApi, ChartContainerProps>(
       };
     }, [container]);
 
-    useLayoutEffect(() => {
+    React.useLayoutEffect(() => {
       const currentRef = chartApiRef.current;
       currentRef.api();
     }, []);
 
-    useLayoutEffect(() => {
+    React.useLayoutEffect(() => {
       const currentRef = chartApiRef.current;
       if (initOptions) {
         currentRef.api().applyOptions(initOptions);
       }
     }, [initOptions]);
 
-    useImperativeHandle(ref, () => chartApiRef.current.api(), []);
+    React.useImperativeHandle(ref, () => chartApiRef.current.api(), []);
 
-    useEffect(() => {
+    React.useEffect(() => {
       const currentRef = chartApiRef.current;
       if (layout) {
         currentRef.api().applyOptions({ layout });

@@ -1,12 +1,6 @@
 "use client";
 
-import type { ForwardedRef } from "react";
-import {
-  useLayoutEffect,
-  useRef,
-  forwardRef,
-  useImperativeHandle,
-} from "react";
+import * as React from "react";
 
 import type {
   Time,
@@ -32,10 +26,10 @@ interface Props<T extends SeriesType, TTime extends Time> {
 
 const SeriesWithGeneric = <T extends SeriesType, TTime extends Time>(
   { data, series: _series, options, onInit, children }: Props<T, TTime>,
-  ref: ForwardedRef<ISeriesApi<T>>
+  ref: React.ForwardedRef<ISeriesApi<T>>
 ) => {
   const chart = useChartContext("Series");
-  const series = useRef<SeriesContext<T>>({
+  const series = React.useRef<SeriesContext<T>>({
     _api: null,
     api() {
       if (!this._api) {
@@ -58,21 +52,21 @@ const SeriesWithGeneric = <T extends SeriesType, TTime extends Time>(
     },
   });
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     const currentRef = series.current;
     currentRef.api();
 
     return () => currentRef.free();
   }, []);
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     const currentRef = series.current;
     if (options) {
       currentRef.api().applyOptions(options);
     }
   }, [options]);
 
-  useImperativeHandle(ref, () => series.current.api(), []);
+  React.useImperativeHandle(ref, () => series.current.api(), []);
 
   return (
     <SeriesContextProvider value={series.current}>
@@ -81,9 +75,9 @@ const SeriesWithGeneric = <T extends SeriesType, TTime extends Time>(
   );
 };
 
-export const Series = forwardRef(SeriesWithGeneric) as <
+export const Series = React.forwardRef(SeriesWithGeneric) as <
   T extends SeriesType,
   TTime extends Time,
 >(
-  props: Props<T, TTime> & { ref?: ForwardedRef<ISeriesApi<T>> }
+  props: Props<T, TTime> & { ref?: React.ForwardedRef<ISeriesApi<T>> }
 ) => ReturnType<typeof SeriesWithGeneric>;

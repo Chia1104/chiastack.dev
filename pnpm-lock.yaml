@@ -599,6 +599,9 @@ importers:
       zod:
         specifier: 'catalog:'
         version: 4.1.12
+      zustand:
+        specifier: ^5.0.8
+        version: 5.0.8(@types/react@19.2.5)(react@19.3.0-canary-fb2177c1-20251114)(use-sync-external-store@1.6.0(react@19.3.0-canary-fb2177c1-20251114))
     devDependencies:
       '@chiastack/eslint':
         specifier: workspace:*
@@ -13099,5 +13102,11 @@ snapshots:
       '@types/react': 19.2.5
       react: 19.2.0
       use-sync-external-store: 1.6.0(react@19.2.0)
+
+  zustand@5.0.8(@types/react@19.2.5)(react@19.3.0-canary-fb2177c1-20251114)(use-sync-external-store@1.6.0(react@19.3.0-canary-fb2177c1-20251114)):
+    optionalDependencies:
+      '@types/react': 19.2.5
+      react: 19.3.0-canary-fb2177c1-20251114
+      use-sync-external-store: 1.6.0(react@19.3.0-canary-fb2177c1-20251114)
 
   zwitch@2.0.4: {}

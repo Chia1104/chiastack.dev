@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import * as React from "react";
 
 import type { LogicalRange } from "lightweight-charts";
 
-import { useChart } from "./chart";
+import { useChartContext } from "./chart.context";
 
 interface Props {
   method: (range: number) => void | Promise<void>;
@@ -15,9 +15,9 @@ export const SubscribeVisibleLogicalRange = ({
   method,
   enabled = true,
 }: Props) => {
-  const chart = useChart();
+  const chart = useChartContext("SubscribeVisibleLogicalRange");
 
-  const handleSubscribeVisibleLogicalRangeChange = useCallback(
+  const handleSubscribeVisibleLogicalRangeChange = React.useCallback(
     (logicalRange: LogicalRange | null) => {
       if (!logicalRange || !enabled) {
         return;
@@ -29,7 +29,7 @@ export const SubscribeVisibleLogicalRange = ({
     [enabled, method]
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     const api = chart.api();
     if (enabled) {
       api

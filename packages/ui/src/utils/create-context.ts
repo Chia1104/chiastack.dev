@@ -1,7 +1,4 @@
-import {
-  createContext as createReactContext,
-  useContext as useReactContext,
-} from "react";
+import * as React from "react";
 
 export interface CreateContextOptions<ContextType> {
   /**
@@ -30,10 +27,10 @@ export function createContext<ContextType>(
 ): CreateContextReturn<ContextType> {
   const { strict = true, namespace = "Context", defaultValue = null } = options;
 
-  const Context = createReactContext<ContextType | null>(defaultValue);
+  const Context = React.createContext<ContextType | null>(defaultValue);
 
   function useContext(name = "useContext") {
-    const context = useReactContext(Context);
+    const context = React.useContext(Context);
 
     if (!context && strict) {
       const error = new Error(`${name} must be used within a ${namespace}`);

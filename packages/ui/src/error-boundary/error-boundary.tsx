@@ -1,11 +1,10 @@
 "use client";
 
-import { Component } from "react";
-import type { ErrorInfo, ReactNode } from "react";
+import * as React from "react";
 
 interface Props<TError> {
   className?: string;
-  children: ReactNode;
+  children: React.ReactNode;
   fallback?:
     | (({
         error,
@@ -13,9 +12,9 @@ interface Props<TError> {
       }: {
         error: TError | null;
         reset: () => void;
-      }) => ReactNode)
-    | ReactNode;
-  onError?: (error: TError, errorInfo: ErrorInfo) => void;
+      }) => React.ReactNode)
+    | React.ReactNode;
+  onError?: (error: TError, errorInfo: React.ErrorInfo) => void;
   handleRetry?: ({
     error,
     reset,
@@ -30,7 +29,7 @@ interface State<TError> {
   error: TError | null;
 }
 
-export class ErrorBoundary<TError extends Error> extends Component<
+export class ErrorBoundary<TError extends Error> extends React.Component<
   Props<TError>,
   State<TError>
 > {
@@ -44,7 +43,7 @@ export class ErrorBoundary<TError extends Error> extends Component<
     return { hasError: true };
   }
 
-  public componentDidCatch(error: TError, errorInfo: ErrorInfo) {
+  public componentDidCatch(error: TError, errorInfo: React.ErrorInfo) {
     this.props.onError?.(error, errorInfo);
     this.setState({ error });
   }

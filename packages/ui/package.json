@@ -56,63 +56,63 @@
   "exports": {
     "./package.json": "./package.json",
     "./trading-chart/chart": {
-      "import": "./dist/trading-chart/chart.mjs",
-      "types": "./dist/trading-chart/chart.d.mts"
+      "import": "./dist/trading-chart/chart.js",
+      "types": "./dist/trading-chart/chart.d.ts"
     },
     "./trading-chart/chart.context": {
-      "import": "./dist/trading-chart/chart.context.mjs",
-      "types": "./dist/trading-chart/chart.context.d.mts"
+      "import": "./dist/trading-chart/chart.context.js",
+      "types": "./dist/trading-chart/chart.context.d.ts"
     },
     "./trading-chart/series": {
-      "import": "./dist/trading-chart/series.mjs",
-      "types": "./dist/trading-chart/series.d.mts"
+      "import": "./dist/trading-chart/series.js",
+      "types": "./dist/trading-chart/series.d.ts"
     },
     "./trading-chart/series.context": {
-      "import": "./dist/trading-chart/series.context.mjs",
-      "types": "./dist/trading-chart/series.context.d.mts"
+      "import": "./dist/trading-chart/series.context.js",
+      "types": "./dist/trading-chart/series.context.d.ts"
     },
     "./trading-chart/macd-series": {
-      "import": "./dist/trading-chart/macd-series.mjs",
-      "types": "./dist/trading-chart/macd-series.d.mts"
+      "import": "./dist/trading-chart/macd-series.js",
+      "types": "./dist/trading-chart/macd-series.d.ts"
     },
     "./trading-chart/rsi-series": {
-      "import": "./dist/trading-chart/rsi-series.mjs",
-      "types": "./dist/trading-chart/rsi-series.d.mts"
+      "import": "./dist/trading-chart/rsi-series.js",
+      "types": "./dist/trading-chart/rsi-series.d.ts"
     },
     "./trading-chart/subscrib-visible-logical-range": {
-      "import": "./dist/trading-chart/subscrib-visible-logical-range.mjs",
-      "types": "./dist/trading-chart/subscrib-visible-logical-range.d.mts"
+      "import": "./dist/trading-chart/subscrib-visible-logical-range.js",
+      "types": "./dist/trading-chart/subscrib-visible-logical-range.d.ts"
     },
     "./error-boundary": {
-      "import": "./dist/error-boundary/error-boundary.mjs",
-      "types": "./dist/error-boundary/error-boundary.d.mts"
+      "import": "./dist/error-boundary/error-boundary.js",
+      "types": "./dist/error-boundary/error-boundary.d.ts"
     }
   },
   "typesVersions": {
     "*": {
       "trading-chart/chart": [
-        "./dist/trading-chart/chart.d.mts"
+        "./dist/trading-chart/chart.d.ts"
       ],
       "trading-chart/chart.context": [
-        "./dist/trading-chart/chart.context.d.mts"
+        "./dist/trading-chart/chart.context.d.ts"
       ],
       "trading-chart/series": [
-        "./dist/trading-chart/series.d.mts"
+        "./dist/trading-chart/series.d.ts"
       ],
       "trading-chart/series.context": [
-        "./dist/trading-chart/series.context.d.mts"
+        "./dist/trading-chart/series.context.d.ts"
       ],
       "trading-chart/macd-series": [
-        "./dist/trading-chart/macd-series.d.mts"
+        "./dist/trading-chart/macd-series.d.ts"
       ],
       "trading-chart/rsi-series": [
-        "./dist/trading-chart/rsi-series.d.mts"
+        "./dist/trading-chart/rsi-series.d.ts"
       ],
       "trading-chart/subscrib-visible-logical-range": [
-        "./dist/trading-chart/subscrib-visible-logical-range.d.mts"
+        "./dist/trading-chart/subscrib-visible-logical-range.d.ts"
       ],
       "error-boundary": [
-        "./dist/error-boundary/error-boundary.d.mts"
+        "./dist/error-boundary/error-boundary.d.ts"
       ]
     }
   }
