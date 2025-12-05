@@ -7,9 +7,28 @@ description: CAPTCHA 驗證服務整合
 
 ## 安裝
 
-```bash
-npm install @chiastack/services
-```
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+    ```bash
+    npm install @chiastack/services
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @chiastack/services
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @chiastack/services
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @chiastack/services
+    ```
+  </Tab>
+</Tabs>
 
 ## 導入
 
@@ -140,13 +159,28 @@ const dto = captchaRequestDTO(request, {
 reCAPTCHASiteverify(request: Request, options?: Options): Promise<CapthcaResponse>
 ```
 
+**參數：**
+- `request`: Request 物件
+- `options` (可選): 選項物件
+  - `provider`: `"google-recaptcha"`（此函數固定使用此 provider）
+  - `captchaSecretKey`: CAPTCHA 的密鑰
+  - `clientIP` (可選): 客戶端 IP 地址，如果不提供會自動從 request 中獲取
+  - `onError` (可選): 錯誤回調函數
+
+**回傳值：**
+- `Promise<CapthcaResponse>`: CAPTCHA 驗證回應
+
 **範例：**
 
 ```typescript
 import { reCAPTCHASiteverify } from '@chiastack/services/captcha';
 
 const response = await reCAPTCHASiteverify(request, {
+  provider: 'google-recaptcha',
   captchaSecretKey: process.env.RECAPTCHA_SECRET_KEY!,
+  onError: (code) => {
+    console.error('CAPTCHA 錯誤:', code);
+  },
 });
 ```
 
@@ -158,13 +192,28 @@ const response = await reCAPTCHASiteverify(request, {
 turnstileSiteverify(request: Request, options?: Options): Promise<CapthcaResponse>
 ```
 
+**參數：**
+- `request`: Request 物件
+- `options` (可選): 選項物件
+  - `provider`: `"cloudflare-turnstile"`（此函數固定使用此 provider）
+  - `captchaSecretKey`: CAPTCHA 的密鑰
+  - `clientIP` (可選): 客戶端 IP 地址，如果不提供會自動從 request 中獲取
+  - `onError` (可選): 錯誤回調函數
+
+**回傳值：**
+- `Promise<CapthcaResponse>`: CAPTCHA 驗證回應
+
 **範例：**
 
 ```typescript
 import { turnstileSiteverify } from '@chiastack/services/captcha';
 
 const response = await turnstileSiteverify(request, {
+  provider: 'cloudflare-turnstile',
   captchaSecretKey: process.env.TURNSTILE_SECRET_KEY!,
+  onError: (code) => {
+    console.error('CAPTCHA 錯誤:', code);
+  },
 });
 ```
 

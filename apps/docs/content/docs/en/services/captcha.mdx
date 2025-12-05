@@ -7,9 +7,28 @@ The `captcha` module provides integration with Cloudflare Turnstile and Google r
 
 ## Installation
 
-```bash
-npm install @chiastack/services
-```
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+    ```bash
+    npm install @chiastack/services
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @chiastack/services
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @chiastack/services
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @chiastack/services
+    ```
+  </Tab>
+</Tabs>
 
 ## Import
 
@@ -140,13 +159,28 @@ Verify Google reCAPTCHA token.
 reCAPTCHASiteverify(request: Request, options?: Options): Promise<CapthcaResponse>
 ```
 
+**Parameters:**
+- `request`: Request object
+- `options` (optional): Options object
+  - `provider`: `"google-recaptcha"` (this function always uses this provider)
+  - `captchaSecretKey`: CAPTCHA secret key
+  - `clientIP` (optional): Client IP address, will be automatically retrieved from request if not provided
+  - `onError` (optional): Error callback function
+
+**Returns:**
+- `Promise<CapthcaResponse>`: CAPTCHA verification response
+
 **Example:**
 
 ```typescript
 import { reCAPTCHASiteverify } from '@chiastack/services/captcha';
 
 const response = await reCAPTCHASiteverify(request, {
+  provider: 'google-recaptcha',
   captchaSecretKey: process.env.RECAPTCHA_SECRET_KEY!,
+  onError: (code) => {
+    console.error('CAPTCHA error:', code);
+  },
 });
 ```
 
@@ -158,13 +192,28 @@ Verify Cloudflare Turnstile token.
 turnstileSiteverify(request: Request, options?: Options): Promise<CapthcaResponse>
 ```
 
+**Parameters:**
+- `request`: Request object
+- `options` (optional): Options object
+  - `provider`: `"cloudflare-turnstile"` (this function always uses this provider)
+  - `captchaSecretKey`: CAPTCHA secret key
+  - `clientIP` (optional): Client IP address, will be automatically retrieved from request if not provided
+  - `onError` (optional): Error callback function
+
+**Returns:**
+- `Promise<CapthcaResponse>`: CAPTCHA verification response
+
 **Example:**
 
 ```typescript
 import { turnstileSiteverify } from '@chiastack/services/captcha';
 
 const response = await turnstileSiteverify(request, {
+  provider: 'cloudflare-turnstile',
   captchaSecretKey: process.env.TURNSTILE_SECRET_KEY!,
+  onError: (code) => {
+    console.error('CAPTCHA error:', code);
+  },
 });
 ```
 

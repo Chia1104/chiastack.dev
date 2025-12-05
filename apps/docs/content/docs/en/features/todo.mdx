@@ -7,9 +7,28 @@ description: Todo management feature
 
 ## Installation
 
-```bash
-npm install @chiastack/features
-```
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+    ```bash
+    npm install @chiastack/features
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @chiastack/features
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @chiastack/features
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @chiastack/features
+    ```
+  </Tab>
+</Tabs>
 
 ## Import
 
@@ -39,7 +58,7 @@ function App() {
 
 Use the `useTodoStore` Hook in your components to access and manipulate todos:
 
-```typescript
+```tsx
 import { useTodoStore } from '@chiastack/features/todo/store';
 
 function TodoList() {
@@ -234,7 +253,7 @@ resetTodos([
 
 ## Complete Example
 
-```typescript
+```tsx
 import { useState } from 'react';
 import { TodoStoreProvider, useTodoStore } from '@chiastack/features/todo/store';
 

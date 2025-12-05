@@ -7,9 +7,28 @@ description: 待辦事項管理功能
 
 ## 安裝
 
-```bash
-npm install @chiastack/features
-```
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+    ```bash
+    npm install @chiastack/features
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @chiastack/features
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @chiastack/features
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @chiastack/features
+    ```
+  </Tab>
+</Tabs>
 
 ## 匯入
 
@@ -23,7 +42,7 @@ import { TodoStoreProvider, useTodoStore } from '@chiastack/features/todo/store'
 
 首先，在應用程式的根元件或需要使用的區域包裹 `TodoStoreProvider`：
 
-```typescript
+```tsx
 import { TodoStoreProvider } from '@chiastack/features/todo/store';
 
 function App() {
@@ -39,7 +58,7 @@ function App() {
 
 在元件中使用 `useTodoStore` Hook 來存取和操作待辦事項：
 
-```typescript
+```tsx
 import { useTodoStore } from '@chiastack/features/todo/store';
 
 function TodoList() {
@@ -234,7 +253,7 @@ resetTodos([
 
 ## 完整範例
 
-```typescript
+```tsx
 import { useState } from 'react';
 import { TodoStoreProvider, useTodoStore } from '@chiastack/features/todo/store';
 

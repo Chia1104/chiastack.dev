@@ -7,9 +7,28 @@ description: Tic-tac-toe game state management
 
 ## Installation
 
-```bash
-npm install @chiastack/features
-```
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+    ```bash
+    npm install @chiastack/features
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @chiastack/features
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @chiastack/features
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @chiastack/features
+    ```
+  </Tab>
+</Tabs>
 
 ## Import
 
@@ -26,7 +45,7 @@ import {
 
 First, wrap your application root or the area where you need to use it with `TicTacToeStoreProvider`:
 
-```typescript
+```tsx
 import { TicTacToeStoreProvider } from '@chiastack/features/tic-tac-toe/store';
 
 function App() {
@@ -42,7 +61,7 @@ function App() {
 
 Use the `useTicTacToeStore` Hook in your components to access and manipulate game state:
 
-```typescript
+```tsx
 import { useTicTacToeStore } from '@chiastack/features/tic-tac-toe/store';
 
 function GameBoard() {
@@ -97,7 +116,7 @@ interface TicTacToeStoreProviderProps {
 
 #### Example
 
-```typescript
+```tsx
 <TicTacToeStoreProvider initialState={{ size: 4 }}>
   <YourComponent />
 </TicTacToeStoreProvider>
@@ -201,7 +220,7 @@ changeSize(4);  // Change to 4x4 board
 
 ## Complete Example
 
-```typescript
+```tsx
 import { TicTacToeStoreProvider, useTicTacToeStore } from '@chiastack/features/tic-tac-toe/store';
 
 function App() {

@@ -7,16 +7,36 @@ description: 聊天功能狀態管理
 
 ## 安裝
 
-```bash
-npm install @chiastack/features
-```
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+    ```bash
+    npm install @chiastack/features
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @chiastack/features
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @chiastack/features
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @chiastack/features
+    ```
+  </Tab>
+</Tabs>
 
 ## 匯入
 
 ```typescript
 import { defineChatStore } from '@chiastack/features/chat/store';
 import type { MessageItem } from '@chiastack/features/chat/types';
-import { MessageRole } from '@chiastack/features/chat/enums';
+import { MessageRole } from '@chiastack/features/chat/enums/message-role.enum';
+import { ChatStatus } from '@chiastack/features/chat/enums/chat-status.enum';
 ```
 
 ## 基本概念
@@ -38,9 +58,17 @@ import { defineChatStore } from '@chiastack/features/chat/store';
 import type { MessageItem } from '@chiastack/features/chat/types';
 
 // 定義訊息處理器
-const messageProcessor = async (message: MessageItem) => {
-  // 處理訊息的邏輯
-  console.log('處理訊息:', message);
+const messageProcessor = async ({ set, get, ctx, response }) => {
+  // response 是一個 async iterable，包含串流資料
+  for await (const chunk of response) {
+    // 處理每個串流區塊
+    const lastMessage = get().getLastMessage();
+    if (lastMessage) {
+      get().updateLastMessageContent(
+        (lastMessage.content || '') + chunk
+      );
+    }
+  }
 };
 
 // 定義 Store
@@ -54,7 +82,7 @@ const { ChatStoreProvider, useChatStore } = defineChatStore({
 
 在應用程式中使用 `ChatStoreProvider`：
 
-```typescript
+```tsx
 function App() {
   return (
     <ChatStoreProvider>
@@ -68,10 +96,10 @@ function App() {
 
 在元件中使用 `useChatStore` Hook：
 
-```typescript
+```tsx
 function ChatInterface() {
-  const messages = useChatStore((state) => state.messages);
-  const sendMessage = useChatStore((state) => state.sendMessage);
+  const messages = useChatStore((state) => state.items);
+  const handleSubmit = useChatStore((state) => state.handleSubmit);
   const status = useChatStore((state) => state.status);
 
   return (
@@ -83,7 +111,7 @@ function ChatInterface() {
           </div>
         ))}
       </div>
-      <button onClick={() => sendMessage('Hello!')}>發送訊息</button>
+      <button onClick={() => handleSubmit('Hello!')}>發送訊息</button>
       <div>狀態: {status}</div>
     </div>
   );
@@ -101,24 +129,29 @@ function ChatInterface() {
 ```typescript
 defineChatStore<TMessageItem, TStreamRequestDTO, TContext>({
   initState?: Partial<ChatState>,
-  messageProcessor: (message: TMessageItem) => Promise<void>,
+  messageProcessor: (context: {
+    set: (partial: Partial<ChatState>, replace?: boolean, action?: string) => void;
+    get: () => ChatStore<TMessageItem, TStreamRequestDTO, TContext>;
+    ctx: unknown;
+    response: AsyncIterable<string>;
+  }) => Promise<void>,
   enableDevtools?: boolean,
 })
 ```
 
 #### 參數
 
-- `initState`: 可選的初始狀態
-- `messageProcessor`: 訊息處理器函式，用於處理收到的訊息
-- `enableDevtools`: 是否啟用 Redux DevTools（預設為 false）
+- `initState` (可選): 初始狀態的部分值
+- `messageProcessor`: 訊息處理器函式，用於處理收到的訊息。接收一個包含 `set`, `get`, `ctx`, `response` 的物件
+- `enableDevtools` (可選): 是否啟用 Redux DevTools（預設為 false）
 
 #### 返回值
 
 返回一個物件，包含：
-- `ChatStoreProvider`: React Context Provider
+- `ChatStoreProvider`: React Context Provider，用於包裹需要使用 store 的元件
 - `useChatStore`: 用於存取 Store 的 Hook
 - `ChatStoreContext`: Store Context（進階使用）
-- `creator`: Store 建立函式（進階使用）
+- `creator`: Store 建立函式（進階使用），用於在非 React 環境中建立 store
 
 ### useChatStore
 
@@ -127,7 +160,33 @@ defineChatStore<TMessageItem, TStreamRequestDTO, TContext>({
 #### 語法
 
 ```typescript
-const value = useChatStore<T>(selector, name?);
+const value = useChatStore<T>(
+  selector: (store: ChatStore) => T,
+  name?: string
+): T
+```
+
+**參數：**
+- `selector`: 選擇器函數，用於從 store 中選擇需要的值
+- `name` (可選): Hook 的名稱，用於錯誤訊息，預設為 `"useChatStore"`
+
+**回傳值：**
+- 選擇器函數返回的值
+
+**範例：**
+
+```typescript
+// 獲取所有訊息
+const messages = useChatStore((state) => state.items);
+
+// 獲取狀態
+const status = useChatStore((state) => state.status);
+
+// 獲取輸入值
+const input = useChatStore((state) => state.input);
+
+// 獲取提交處理函數
+const handleSubmit = useChatStore((state) => state.handleSubmit);
 ```
 
 ### MessageItem
@@ -162,6 +221,27 @@ enum MessageRole {
 }
 ```
 
+### ChatStatus
+
+聊天狀態枚舉：
+
+```typescript
+const ChatStatus = {
+  Idle: "idle",
+  Streaming: "streaming",
+  Error: "error",
+  Success: "success",
+  Searching: "searching",
+} as const;
+```
+
+**狀態說明：**
+- `Idle`: 閒置狀態，沒有正在進行的操作
+- `Streaming`: 正在接收串流資料
+- `Error`: 發生錯誤
+- `Success`: 操作成功完成
+- `Searching`: 正在搜尋（用於需要搜尋功能的場景）
+
 ## 進階使用
 
 ### 自訂 MessageItem
@@ -188,7 +268,27 @@ const { ChatStoreProvider, useChatStore } = defineChatStore<CustomMessageItem>({
 
 ### 串流處理
 
-Chat Store 支援串流訊息的處理。你可以使用 `fetchStream` 工具函式：
+Chat Store 內建支援串流訊息的處理。`messageProcessor` 會接收到一個 async iterable 的 `response`，你可以直接迭代處理：
+
+```typescript
+const messageProcessor = async ({ set, get, ctx, response }) => {
+  const lastMessage = get().getLastMessage();
+  
+  for await (const chunk of response) {
+    // 處理每個串流區塊
+    if (lastMessage) {
+      get().updateLastMessageContent(
+        (lastMessage.content || '') + chunk
+      );
+    }
+  }
+  
+  // 串流完成後，更新狀態
+  set({ status: ChatStatus.Idle, isPending: false });
+};
+```
+
+如果你需要直接使用 `fetchStream` 工具函式（例如在自訂的請求處理中），可以這樣做：
 
 ```typescript
 import { fetchStream } from '@chiastack/features/utils/stream';
@@ -209,9 +309,17 @@ for await (const chunk of stream) {
 Chat Store 支援多執行緒（thread）功能，可以為不同的對話建立不同的執行緒：
 
 ```typescript
+// 獲取特定執行緒的訊息
 const messages = useChatStore((state) => 
-  state.messages.filter((msg) => msg.threadId === 'thread-123')
+  state.items.filter((msg) => msg.threadId === 'thread-123')
 );
+
+// 切換執行緒
+const setThreadId = useChatStore((state) => state.setThreadId);
+setThreadId('thread-123');
+
+// 獲取當前執行緒 ID
+const threadId = useChatStore((state) => state.threadId);
 ```
 
 ## 工具函式
@@ -228,24 +336,29 @@ const threadId = DEFAULT_THREAD_ID; // 'inbox'
 
 ## 完整範例
 
-```typescript
+```tsx
 import { defineChatStore } from '@chiastack/features/chat/store';
 import type { MessageItem } from '@chiastack/features/chat/types';
-import { MessageRole } from '@chiastack/features/chat/enums';
-import { useState } from 'react';
+import { MessageRole } from '@chiastack/features/chat/enums/message-role.enum';
+import { ChatStatus } from '@chiastack/features/chat/enums/chat-status.enum';
 
 // 定義 Store
 const { ChatStoreProvider, useChatStore } = defineChatStore({
-  messageProcessor: async (message: MessageItem) => {
-    // 模擬 API 呼叫
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      body: JSON.stringify({ message: message.content }),
-    });
-    const data = await response.json();
+  messageProcessor: async ({ set, get, ctx, response }) => {
+    // response 是串流回應，可以直接迭代
+    const lastMessage = get().getLastMessage();
     
-    // 處理回應
-    console.log('收到回應:', data);
+    for await (const chunk of response) {
+      // 處理每個串流區塊
+      if (lastMessage) {
+        get().updateLastMessageContent(
+          (lastMessage.content || '') + chunk
+        );
+      }
+    }
+    
+    // 串流完成後更新狀態
+    set({ status: ChatStatus.Idle, isPending: false });
   },
   enableDevtools: process.env.NODE_ENV === 'development',
 });
@@ -259,18 +372,11 @@ function App() {
 }
 
 function ChatApp() {
-  const [input, setInput] = useState('');
-  
-  const messages = useChatStore((state) => state.messages);
-  const sendMessage = useChatStore((state) => state.sendMessage);
+  const messages = useChatStore((state) => state.items);
+  const handleSubmit = useChatStore((state) => state.handleSubmit);
   const status = useChatStore((state) => state.status);
-
-  const handleSend = () => {
-    if (input.trim()) {
-      sendMessage(input);
-      setInput('');
-    }
-  };
+  const inputValue = useChatStore((state) => state.input);
+  const setInputValue = useChatStore((state) => state.setInput);
 
   return (
     <div>
@@ -287,13 +393,13 @@ function ChatApp() {
 
       <div>
         <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
           placeholder="輸入訊息..."
           disabled={status === 'loading'}
         />
-        <button onClick={handleSend} disabled={status === 'loading'}>
+        <button onClick={() => handleSubmit()} disabled={status === 'loading'}>
           發送
         </button>
       </div>
