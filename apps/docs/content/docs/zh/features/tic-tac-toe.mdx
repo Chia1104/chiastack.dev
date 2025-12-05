@@ -7,9 +7,28 @@ description: 井字遊戲狀態管理
 
 ## 安裝
 
-```bash
-npm install @chiastack/features
-```
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+    ```bash
+    npm install @chiastack/features
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @chiastack/features
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @chiastack/features
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @chiastack/features
+    ```
+  </Tab>
+</Tabs>
 
 ## 匯入
 
@@ -26,7 +45,7 @@ import {
 
 首先，在應用程式的根元件或需要使用的區域包裹 `TicTacToeStoreProvider`：
 
-```typescript
+```tsx
 import { TicTacToeStoreProvider } from '@chiastack/features/tic-tac-toe/store';
 
 function App() {
@@ -42,7 +61,7 @@ function App() {
 
 在元件中使用 `useTicTacToeStore` Hook 來存取和操作遊戲狀態：
 
-```typescript
+```tsx
 import { useTicTacToeStore } from '@chiastack/features/tic-tac-toe/store';
 
 function GameBoard() {
@@ -97,7 +116,7 @@ interface TicTacToeStoreProviderProps {
 
 #### 範例
 
-```typescript
+```tsx
 <TicTacToeStoreProvider initialState={{ size: 4 }}>
   <YourComponent />
 </TicTacToeStoreProvider>
@@ -201,7 +220,7 @@ changeSize(4);  // 改為 4x4 遊戲板
 
 ## 完整範例
 
-```typescript
+```tsx
 import { TicTacToeStoreProvider, useTicTacToeStore } from '@chiastack/features/tic-tac-toe/store';
 
 function App() {

@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { defineI18nUI } from "fumadocs-ui/i18n";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import { Inter } from "next/font/google";
@@ -39,6 +40,7 @@ export default async function Layout({
           }}>
           {children}
         </RootProvider>
+        <Analytics />
       </body>
     </html>
   );
