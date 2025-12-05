@@ -1,9 +1,9 @@
 ---
 title: UI
-description: UI 元件庫
+description: React UI 元件庫，提供交易圖表和錯誤處理元件
 ---
 
-`@chiastack/ui` 是一個 React UI 元件庫，提供可重複使用的 UI 元件。
+`@chiastack/ui` 是一個 React UI 元件庫，提供可重複使用的 UI 元件，特別專注於交易圖表（TradingView 風格）和錯誤處理功能。
 
 ## 安裝
 
@@ -32,7 +32,7 @@ description: UI 元件庫
 
 ## 相依性
 
-此套件需要 React 作為 peer dependency：
+此套件需要以下 peer dependencies：
 
 <Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
   <Tab value="npm">
@@ -57,15 +57,29 @@ description: UI 元件庫
   </Tab>
 </Tabs>
 
-## 使用方式
+**注意：** 使用交易圖表相關元件時，還需要安裝 `lightweight-charts` 和 `technicalindicators`。
 
-```typescript
-import { name } from '@chiastack/ui';
+## 模組
 
-console.log(name); // "@chiastack/ui"
+<Cards>
+  <Card title="Trading Chart" href="/zh/docs/ui/trading-chart" description="交易圖表元件，基於 lightweight-charts 構建" />
+  <Card title="Error Boundary" href="/zh/docs/ui/error-boundary" description="React 錯誤邊界元件，用於捕獲和處理元件樹中的錯誤" />
+</Cards>
+
+## 基本用法
+
+```tsx
+import { Chart } from '@chiastack/ui/trading-chart/chart';
+import { ErrorBoundary } from '@chiastack/ui/error-boundary';
+
+function App() {
+  return (
+    <ErrorBoundary fallback={<div>發生錯誤</div>}>
+      <Chart>
+        {/* Chart components */}
+      </Chart>
+    </ErrorBoundary>
+  );
+}
 ```
-
-## 注意
-
-此套件目前正在開發中。更多元件將在未來版本中提供。
 

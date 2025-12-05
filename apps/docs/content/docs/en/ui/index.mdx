@@ -1,9 +1,9 @@
 ---
 title: UI
-description: UI component library
+description: React UI component library providing trading charts and error handling components
 ---
 
-`@chiastack/ui` is a React UI component library that provides reusable UI components.
+`@chiastack/ui` is a React UI component library that provides reusable UI components, with a focus on trading charts (TradingView-style) and error handling functionality.
 
 ## Installation
 
@@ -32,7 +32,7 @@ description: UI component library
 
 ## Dependencies
 
-This package requires React as a peer dependency:
+This package requires the following peer dependencies:
 
 <Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
   <Tab value="npm">
@@ -57,15 +57,29 @@ This package requires React as a peer dependency:
   </Tab>
 </Tabs>
 
-## Usage
+**Note:** When using trading chart related components, you also need to install `lightweight-charts` and `technicalindicators`.
 
-```typescript
-import { name } from '@chiastack/ui';
+## Modules
 
-console.log(name); // "@chiastack/ui"
+<Cards>
+  <Card title="Trading Chart" href="/docs/ui/trading-chart" description="Trading chart components built on top of lightweight-charts" />
+  <Card title="Error Boundary" href="/docs/ui/error-boundary" description="React error boundary component for catching and handling errors in component trees" />
+</Cards>
+
+## Basic Usage
+
+```tsx
+import { Chart } from '@chiastack/ui/trading-chart/chart';
+import { ErrorBoundary } from '@chiastack/ui/error-boundary';
+
+function App() {
+  return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      <Chart>
+        {/* Chart components */}
+      </Chart>
+    </ErrorBoundary>
+  );
+}
 ```
-
-## Note
-
-This package is currently under development. More components will be available in future versions.
 
