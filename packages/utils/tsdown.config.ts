@@ -19,6 +19,8 @@ const ESEntries = [
   "./src/is/is.ts",
   "./src/delay/delay.ts",
   "./src/server/server.ts",
+  "./src/algorithms/algorithms.ts",
+  "./src/mathex/mathex.ts",
 ];
 
 export default defineConfig((opts) => {
