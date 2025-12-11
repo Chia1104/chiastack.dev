@@ -54,6 +54,14 @@
     "./server": {
       "import": "./dist/server/server.mjs",
       "types": "./dist/server/server.d.mts"
+    },
+    "./algorithms": {
+      "import": "./dist/algorithms/algorithms.mjs",
+      "types": "./dist/algorithms/algorithms.d.mts"
+    },
+    "./mathex": {
+      "import": "./dist/mathex/mathex.mjs",
+      "types": "./dist/mathex/mathex.d.mts"
     }
   },
   "typesVersions": {
@@ -75,6 +83,12 @@
       ],
       "server": [
         "./dist/server/server.d.mts"
+      ],
+      "algorithms": [
+        "./dist/algorithms/algorithms.d.mts"
+      ],
+      "mathex": [
+        "./dist/mathex/mathex.d.mts"
       ]
     }
   },
