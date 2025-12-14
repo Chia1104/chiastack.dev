@@ -1,5 +1,6 @@
 packages:
   - apps/docs
+  - apps/ts-docs
   - packages/*
   - playground/*
 
@@ -24,6 +25,10 @@ catalogs:
   eslint:
     '@eslint/js': 9.39.1
     eslint: 9.39.1
+  fumadocs:
+    'fumadocs-core': 16.2.5
+    'fumadocs-mdx': 14.1.0
+    'fumadocs-ui': 16.2.5
   next-is:
     '@next/bundle-analyzer': 16.0.10
     '@next/eslint-plugin-next': 16.0.10
@@ -46,9 +51,12 @@ catalogs:
     '@tanstack/pacer': 0.16.3
     '@tanstack/react-query': ^5.90.7
     '@tanstack/react-router': ^1.141.1
+    '@tanstack/react-router-devtools': ^1.141.1
+    '@tanstack/react-start': ^1.141.1
     '@tanstack/router-plugin': ^1.141.1
   vite:
     '@vitejs/plugin-react': 5.1.2
     vite: 7.2.7
+    'vite-tsconfig-paths': 5.1.4
 
 linkWorkspacePackages: true
